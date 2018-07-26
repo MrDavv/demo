@@ -5,7 +5,7 @@
 
 const mongoose = require('mongoose');
 const db=require('./db');
-const modelName='InfoCategory';
+const modelName='Category';
 
 const schema=new mongoose.Schema({
     name: {

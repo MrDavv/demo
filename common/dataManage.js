@@ -7,7 +7,7 @@ const authCode = nameSpace.code.authCode;
 let dbModel, exist;
 module.exports = {
     async add(modelName, asset) {
-        try{
+        try {
             dbModel = nameSpace.dbModel[modelName];
             // step: 1 judge exists
             exist = await dbModel.findOne({name: asset.name});
@@ -16,7 +16,7 @@ module.exports = {
             } else {
                 await dbModel.create(asset);
             }
-        }catch (ex){
+        } catch (ex) {
             throw ex;
         }
     },
@@ -32,7 +32,7 @@ module.exports = {
             } else {
                 throw authCode.NONEXISTED;
             }
-        }catch (ex){
+        } catch (ex) {
             throw ex;
         }
 
@@ -44,22 +44,34 @@ module.exports = {
         try {
             dbModel = nameSpace.dbModel[modelName];
             exist = await dbModel.findOne(filters);
-            if(exist){
+            if (exist) {
                 await dbModel.update(filters, asset);
-            }else {
+            } else {
                 throw authCode.NONEXISTED;
             }
-        }catch (ex){
+        } catch (ex) {
             throw ex;
         }
-
+    },
+    async updatePraiseNum(modelName, filters, type) {
+        try {
+            dbModel = nameSpace.dbModel[modelName];
+            exist = await dbModel.findOne(filters);
+            if (exist) {
+                await dbModel.update(filters, {$set: {praiseNum: type == 1 ? exist.praiseNum + 1 : exist.praiseNum - 1}});
+            } else {
+                throw authCode.NONEXISTED;
+            }
+        } catch (ex) {
+            throw ex;
+        }
     },
     async getAll(modelName) {
-        try{
+        try {
             dbModel = nameSpace.dbModel[modelName];
             let data = await dbModel.find({});
             return data;
-        }catch (ex){
+        } catch (ex) {
             throw ex;
         }
     },
@@ -68,7 +80,7 @@ module.exports = {
             dbModel = nameSpace.dbModel[modelName];
             let data = await dbModel.find(filters);
             return data;
-        }catch (ex){
+        } catch (ex) {
             throw ex;
         }
     },

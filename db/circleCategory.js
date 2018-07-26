@@ -1,5 +1,5 @@
 /**
- * Created by wei on 18-7-26.
+ * Created by wei on 18-7-17.
  */
 'use strict';
 
@@ -15,6 +15,9 @@ const schema=new mongoose.Schema({
     orderNum: {
         type: Number,
         required: true
+    },
+    createTime: {
+        type: Date
     }
 });
 

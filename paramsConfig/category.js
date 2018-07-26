@@ -4,7 +4,8 @@
 module.exports = {
     add: {
         name: true,
-        orderNum: true
+        orderNum: true,
+        type: false // 1 info, 2 community, 3 circle
     },
     remove: {
         uid: true
@@ -18,7 +19,7 @@ module.exports = {
 
     },
     getByFilters: {
-        type: true,
+        searchType: true,
         name: false,
         orderNum: false
     }

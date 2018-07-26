@@ -6,10 +6,25 @@ const db=require('./db');
 const modelName='CircleComment';
 
 const schema=new mongoose.Schema({
-
+    circleContentUid: { // 被评论的文章标识
+        type: String
+    },
+    uid: { // 评论用户标识
+        type: String
+    },
+    content: { //  评论内容
+        type: String
+    },
+    praiseNum: { // 该评论的点赞数
+        type: Number,
+        default: 0
+    },
+    createTime: {
+        type: Date
+    }
 });
 
-// schema.index( {name : 1}, { unique : true } );
+schema.index( {createTime : 1}, { unique : false } );
 
 schema.statics={
 

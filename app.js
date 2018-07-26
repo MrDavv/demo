@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const config = require('config');
 require('./db/mongodb').load();
 
 
@@ -45,9 +46,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/', require('./routes/index'));
-app.use('/users', require('./routes/user/user'));
-app.use('/infoCategory', require('./routes/information/infoCategory'));
+config.settingRoutes(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

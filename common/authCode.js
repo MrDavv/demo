@@ -9,4 +9,5 @@ module.exports = {
     NONEXISTED: 503, // none existed
     UIDERROR: 504, // uid error
     ORDERNUMERROR: 505, // orderNum error
+    TIMEOUT: 506, // praise timeout
 };

@@ -8,10 +8,30 @@ const db=require('./db');
 const modelName='User';
 
 const schema=new mongoose.Schema({
-
+    communityUid: { // 社区标识
+        type: String
+    },
+    name: {
+        type: String
+    },
+    headImageUrl: {
+        type: String
+    },
+    level: {
+        type: Number
+    },
+    phone: {
+        type: Number
+    },
+    address: {
+        type: String
+    },
+    createTime: {
+        type: Date
+    }
 });
 
-// schema.index( {lastUpdateTime : 1}, { unique : false } );
+schema.index( {phone : 1}, { unique : true } );
 
 schema.statics={
 

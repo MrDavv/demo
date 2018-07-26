@@ -5,13 +5,13 @@
 
 const express = require('express');
 const router = express.Router();
-const nameSpace = require('../../common/nameSpace');
+const nameSpace = require('../common/nameSpace');
 const dataManage = nameSpace.manager.dataManage;
 const authCode = nameSpace.code.authCode;
 const check = nameSpace.util.checkParams;
-
-const constant = require('../../common/constant');
-const routeName = constant.routes.INFOCATEGORY;
+const getByType = nameSpace.util.getCategory;
+const constant = require('../common/constant');
+let routeName = constant.routes.CATEGORY;
 
 let logger;
 let result;
@@ -24,7 +24,8 @@ router.get('/add', async function(req, res, next) {
             name: req.query.name || req.body.name,
             orderNum: req.query.orderNum || req.body.orderNum
         };
-
+        let type = req.query.type || req.body.type;
+        routeName = getByType.getCategory(type);
         result = await dataManage.add(routeName, asset);
 
         res.send({code: authCode.SUCCESS});
@@ -45,9 +46,11 @@ router.get('/remove', async function (req, res, next) {
         check.checkParams(routeName, 'remove', req);
 
         let uid = req.query.uid || req.body.uid;
+        let type = req.query.type || req.body.type;
 
         check.checkUid(uid);
 
+        routeName = getByType.getCategory(type);
         result = await dataManage.delSingle(routeName, {_id: uid});
 
         res.send({code: authCode.SUCCESS});
@@ -67,12 +70,15 @@ router.get('/update', async function (req, res, next) {
         check.checkParams(routeName, 'update', req);
 
         let uid = req.query.uid || req.body.uid;
+        let type = req.query.type || req.body.type;
         let asset = {
             name: req.query.name,
             orderNum: req.query.orderNum
         };
 
         check.checkUid(uid);
+
+        routeName = getByType.getCategory(type);
 
         result = await dataManage.upSingle(routeName, {_id: uid}, asset);
 
@@ -91,6 +97,9 @@ router.get('/update', async function (req, res, next) {
 router.get('/getAll', async function (req, res, next) {
     try{
         check.checkParams(routeName, 'getAll', req);
+
+        let type = req.query.type || req.body.type;
+        routeName = getByType.getCategory(type);
 
         result = await dataManage.getAll(routeName);
 
@@ -112,10 +121,11 @@ router.get('/getByFilters', async function (req, res, next) {
 
         let asset = {};
         let type = req.query.type || req.body.type;
+        let searchType = req.query.searchType || req.body.searchType;
         let name = req.query.name || req.body.name;
         let orderNum = req.query.orderNum || req.body.orderNum;
 
-        if(type == 1){
+        if(searchType == 1){
             if(name){
                 asset = {
                     name: name
@@ -130,6 +140,7 @@ router.get('/getByFilters', async function (req, res, next) {
             }
         }
 
+        routeName = getByType.getCategory(type);
         result = await dataManage.getByFilters(routeName, asset);
 
         res.send({code: authCode.SUCCESS, data: result});

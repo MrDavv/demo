@@ -3,7 +3,8 @@
  */
 module.exports = {
     routes: {
-        INFOCATEGORY: 'infoCategory',
-        CIRCLECATEGORY: 'circleCategory'
+        CATEGORY: 'category',
+        CIRCLECONTENT: 'circleContent',
+        CIRCLECOMMENT: 'circleComment'
     }
 };
