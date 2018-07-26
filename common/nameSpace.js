@@ -6,11 +6,11 @@ const namespace = {
         get user() {
             return require('mongoose').models['User'];
         },
-        get category() {
-            return require('mongoose').models['Category'];
+        get infoCategory() {
+            return require('mongoose').models['InfoCategory'];
         },
-        get article() {
-            return require('mongoose').models['Article'];
+        get infoArticle() {
+            return require('mongoose').models['InfoArticle'];
         },
     },
     //工具

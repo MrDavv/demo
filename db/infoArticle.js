@@ -5,21 +5,13 @@
 
 const mongoose = require('mongoose');
 const db=require('./db');
-const modelName='Category';
+const modelName='InfoArticle';
 
 const schema=new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    orderNum: {
-        type: Number,
-        required: true
-    }
+
 });
 
-schema.index( {name : 1}, { unique : true } );
-schema.index( {orderNum: 1}, { unique: true });
+// schema.index( {lastUpdateTime : 1}, { unique : false } );
 
 schema.statics={
 

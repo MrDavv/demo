@@ -5,28 +5,27 @@
 
 const express = require('express');
 const router = express.Router();
-const nameSpace = require('../common/nameSpace');
+const nameSpace = require('../../common/nameSpace');
 const dataManage = nameSpace.manager.dataManage;
 const authCode = nameSpace.code.authCode;
 const check = nameSpace.util.checkParams;
-const constant = require('../common/constant');
-const dbModelName = constant.dbModel.CATEGORY;
 
+const constant = require('../../common/constant');
+const routeName = constant.routes.INFOCATEGORY;
 
 let logger;
 let result;
 /* GET users listing. */
 router.get('/add', async function(req, res, next) {
     try{
-        // check params
-        check.checkParams(dbModelName, 'add', req);
+        check.checkParams(routeName, 'add', req);
 
         let asset = {
             name: req.query.name || req.body.name,
             orderNum: req.query.orderNum || req.body.orderNum
         };
 
-        result = await dataManage.add(dbModelName, asset);
+        result = await dataManage.add(routeName, asset);
 
         res.send({code: authCode.SUCCESS});
     }catch (ex){
@@ -43,13 +42,13 @@ router.get('/add', async function(req, res, next) {
 
 router.get('/remove', async function (req, res, next) {
     try{
-        check.checkParams(dbModelName, 'remove', req);
+        check.checkParams(routeName, 'remove', req);
 
         let uid = req.query.uid || req.body.uid;
 
         check.checkUid(uid);
 
-        result = await dataManage.delSingle(dbModelName, {_id: uid});
+        result = await dataManage.delSingle(routeName, {_id: uid});
 
         res.send({code: authCode.SUCCESS});
     }catch (ex) {
@@ -65,7 +64,7 @@ router.get('/remove', async function (req, res, next) {
 
 router.get('/update', async function (req, res, next) {
     try{
-        check.checkParams(dbModelName, 'update', req);
+        check.checkParams(routeName, 'update', req);
 
         let uid = req.query.uid || req.body.uid;
         let asset = {
@@ -75,7 +74,7 @@ router.get('/update', async function (req, res, next) {
 
         check.checkUid(uid);
 
-        result = await dataManage.upSingle(dbModelName, {_id: uid}, asset);
+        result = await dataManage.upSingle(routeName, {_id: uid}, asset);
 
         res.send({code: authCode.SUCCESS});
     }catch (ex){
@@ -91,9 +90,9 @@ router.get('/update', async function (req, res, next) {
 
 router.get('/getAll', async function (req, res, next) {
     try{
-        check.checkParams(dbModelName, 'getAll', req);
+        check.checkParams(routeName, 'getAll', req);
 
-        result = await dataManage.getAll(dbModelName);
+        result = await dataManage.getAll(routeName);
 
         res.send({code: authCode.SUCCESS, data: result});
     } catch (ex){
@@ -109,7 +108,7 @@ router.get('/getAll', async function (req, res, next) {
 
 router.get('/getByFilters', async function (req, res, next) {
     try{
-        check.checkParams(dbModelName, 'getByFilters', req);
+        check.checkParams(routeName, 'getByFilters', req);
 
         let asset = {};
         let type = req.query.type || req.body.type;
@@ -131,7 +130,7 @@ router.get('/getByFilters', async function (req, res, next) {
             }
         }
 
-        result = await dataManage.getByFilters(dbModelName, asset);
+        result = await dataManage.getByFilters(routeName, asset);
 
         res.send({code: authCode.SUCCESS, data: result});
     } catch (ex){

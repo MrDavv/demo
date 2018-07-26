@@ -5,7 +5,7 @@
 module.exports = {
     load () {
         require('./user').load();
-        require('./category').load();
-        require('./article').load();
+        require('./infoCategory').load();
+        require('./infoArticle').load();
     }
 };

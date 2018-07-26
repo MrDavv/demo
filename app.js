@@ -10,8 +10,8 @@ require('./db/mongodb').load();
 const app = express();
 
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());//解析json数据格式的
@@ -46,8 +46,8 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', require('./routes/index'));
-app.use('/users', require('./routes/users'));
-app.use('/category', require('./routes/category'));
+app.use('/users', require('./routes/user/user'));
+app.use('/infoCategory', require('./routes/information/infoCategory'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
