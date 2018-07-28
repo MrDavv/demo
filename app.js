@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const config = require('config');
+const config = require('./config');
 require('./db/mongodb').load();
 
 

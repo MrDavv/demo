@@ -7,5 +7,10 @@ module.exports = {
         require('./user').load();
         require('./category').load();
         require('./infoArticle').load();
+        require('./infoCategory').load();
+        require('./circleCategory').load();
+        require('./communityCategory').load();
+        require('./circleContent').load();
+        require('./circleComment').load();
     }
 };

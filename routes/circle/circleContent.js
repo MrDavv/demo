@@ -20,15 +20,17 @@ const queue = seqQueue.createQueue(5000);
 let logger;
 let result;
 /* GET users listing. */
-router.get('/add', async function(req, res, next) {
+router.post('/add', async function(req, res, next) {
     try{
-        check.checkParams(routeName, 'add', req);
-
-       let asset = {
-
-       };
-
-        result = await dataManage.add(routeName, asset);
+        // var file_obj = req.files.pics;
+        // console.log(file_obj.length);
+       //  check.checkParams(routeName, 'add', req);
+       //
+       // let asset = {
+       //
+       // };
+       //
+       //  result = await dataManage.add(routeName, asset);
 
         res.send({code: authCode.SUCCESS});
     }catch (ex){

@@ -11,6 +11,9 @@ const schema=new mongoose.Schema({
     communityUid: { // 社区标识
         type: String
     },
+    openId: { // 用户唯一标示
+        type: String
+    },
     name: {
         type: String
     },
